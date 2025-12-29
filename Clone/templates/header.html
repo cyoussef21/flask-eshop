@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>MyAmazon</title>
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='assets/favicon.png') }}">
+  {{ bootstrap.load_css() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/amazon.css') }}">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+<nav class="navbar navbar-expand-lg navbar-dark bg-amazon">
+  <div class="container-fluid align-items-center">
+    <a class="navbar-brand d-flex align-items-center pe-3 navbar-white" href="{{ url_for('home_page') }}">
+      <img src="{{ url_for('static', filename='assets/logo.png') }}" alt="logo" class="me-2">
+      <span class="brand-text">MyAmazon</span>
+    </a>
+
+    <div class="d-none d-lg-flex align-items-center text-white pe-3 small navbar-white">
+      <a href="{{ url_for('logout') }}" class="navbar-white">Deliver to<strong class="ms-1">Your Address</strong></a>
+    </div>
+
+    <form class="d-flex flex-grow-1 mx-2" role="search">
+        <select class="form-select">
+        <option>All</option>
+        <option>Electronics</option>
+        <option>Clothing</option>
+      </select>
+
+        <input class="form-control" type="search" placeholder="MyAmazon" aria-label="Search">
+        <button class="btn btn-warning" type="submit">Search</button>
+    </form>
+
+    <ul class="navbar-nav ms-2 d-flex flex-row align-items-center">
+      <li class="nav-item me-3 text-white text-end">
+        {% if current_user.is_active %}
+        <a class="navbar-white" href="{{ url_for('logout') }}">
+          <div class="small text-start">Hello,</div>
+          <div class="fw-bold">{{ current_user.user_name }}</div>
+        </a>
+        {% else %}
+        <a class="navbar-white" href="{{ url_for('login') }}">
+          <div class="small text-start">Hello,</div>
+          <div class="fw-bold">Sign in</div>
+        </a>
+        {% endif %}
+      </li>
+      <li class="nav-item me-3 text-white text-end d-none d-md-block">
+        <div class="small">Returns</div>
+        <div class="fw-bold">& Orders</div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white d-flex align-items-center navbar_white" href="{{ url_for('cart_page', user_id=current_user.user_id) }}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cart"
+               viewBox="0 0 16 16">
+            <path
+                d="M0 1.5A.5.5 0 0 1 .5 1h1a.5.5 0 0 1 .485.379L2.89 5H14.5a.5.5 0 0 1 .49.598l-1.5 6A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.485-.379L1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 1a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+          </svg>
+          <span class="ms-1 fw-bold">Cart</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Departments bar -->
+<div class="bg-light border-bottom small">
+  <div class="container">
+    <div class="d-flex overflow-auto py-2">
+      <a class="me-3 text-decoration-none text-muted" href="{{ url_for('category_page', category='electronics') }}">Electronics</a>
+      <a class="me-3 text-decoration-none text-muted" href="{{ url_for('category_page', category='fashion') }}">Fashion</a>
+      <a class="me-3 text-decoration-none text-muted" href="{{ url_for('category_page', category='home') }}">Home</a>
+      <a class="me-3 text-decoration-none text-muted" href="{{ url_for('category_page', category='beauty') }}">Beauty</a>
+    </div>
+  </div>
+</div>
+</body>

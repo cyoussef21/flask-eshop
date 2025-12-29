@@ -1,0 +1,35 @@
+/* Minimal custom styles to get an Amazon-like look */
+:root{
+  --amazon-blue:#232f3e;
+  --amazon-yellow:#ff9900;
+}
+.bg-amazon{ background-color: var(--amazon-blue) !important; }
+.brand-text{ font-weight:700; color: #fff; }
+.navbar .btn-warning{ background-color: var(--amazon-yellow); border-color: var(--amazon-yellow); }
+.navbar .form-control{ height:44px; }
+.footer-link{ color: #ddd; }
+@media (max-width: 767px){
+  .navbar .d-none.d-lg-flex{ display:none !important; }
+}
+
+a.navbar-white {
+  color: white;
+  text-decoration: none;
+}
+
+.product-thumbnail {
+  width: 75%;
+  height: 75%
+}
+
+.description-text-lg {
+  font-size: 1.2em;
+}
+
+.product-image {
+  width: 80%;
+  height: 80%
+}
+/*a:hover {
+    outline:1px solid white;
+}*/
