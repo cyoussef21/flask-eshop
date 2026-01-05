@@ -1,5 +1,4 @@
 # Flask e-Shop
-[![Ask DeepWiki](https://devin.ai/assets/askdeepwiki.png)](https://deepwiki.com/cyoussef21/flask-eshop)
 
 A full-featured e-commerce web application built with Flask and styled with Bootstrap to mimic the look and feel of Amazon. The application includes user authentication, product browsing, a shopping cart, and an admin panel for product management.
 
