@@ -1,0 +1,13 @@
+{% include 'header.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+<div class="container my-4">
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <p class="flash alert alert-danger">{{ message }}</p>
+    {% endfor %}
+  {% endif %}
+  {% endwith %}
+  {{ render_form(form) }}
+</div>
+{% include 'footer.html' %}

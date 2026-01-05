@@ -1,0 +1,18 @@
+{% include 'header.html' %}
+
+<main class="container my-4">
+  <div class="d-grid gap-5 col-3 mx-auto mb-3">
+    <a href="{{ url_for('add_product_api') }}" class="btn btn-primary btn-lg" type="button">Product Add (API)</a>
+    <a href="{{ url_for('add_product_manual') }}" class="btn btn-primary btn-lg" type="button">Product Add (Manual)</a>
+    <a class="btn btn-primary btn-lg" type="button">Product Management</a>
+  </div>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <p class="flash alert alert-danger">{{ message }}</p>
+    {% endfor %}
+  {% endif %}
+  {% endwith %}
+</main>
+
+{% include 'footer.html' %}

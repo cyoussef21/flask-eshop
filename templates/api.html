@@ -1,0 +1,23 @@
+{% include 'header.html' %}
+<div class="container my-4" role="group">
+  <div class="row btn-group">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+        <p class="flash alert alert-danger">{{ message }}</p>
+      {% endfor %}
+    {% endif %}
+    {% endwith %}
+    {% for category in categories %}
+    <div class="col-3 mb-3">
+      <form action="{{ url_for('add_product_api') }}" method="POST">
+        <input type="hidden" name="product_type" value="{{ category[0] }}">
+        <input type="hidden" name="category" value="{{ category[1] }}">
+        <button class="btn btn-lg btn-primary">{{category[0].replace('-', ' ').title()}}</button>
+      </form>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% include 'footer.html' %}

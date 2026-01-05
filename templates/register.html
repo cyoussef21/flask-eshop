@@ -1,0 +1,54 @@
+{% include 'header.html' %}
+
+<main class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-10 col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <div class="text-center mb-3">
+            <img src="{{ url_for('static', filename='assets/logo.png') }}" alt="logo">
+          </div>
+          <h3 class="mb-3">Create account</h3>
+          <form method="post" novalidate>
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3">
+              <label class="form-label">{{ form.name.label.text }}</label>
+              {{ form.name(class='form-control', id='name', placeholder='Your name') }}
+              {% if form.name.errors %}
+                <div class="form-text text-danger">{{ form.name.errors[0] }}</div>
+              {% endif %}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">{{ form.email.label.text }}</label>
+              {{ form.email(class='form-control', id='email', placeholder='Email') }}
+              {% if form.email.errors %}
+                <div class="form-text text-danger">{{ form.email.errors[0] }}</div>
+              {% endif %}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">{{ form.password.label.text }}</label>
+              {{ form.password(class='form-control', id='password', placeholder='Create a password') }}
+              <div class="form-text small text-muted">Passwords must be at least 6 characters.</div>
+              {% if form.password.errors %}
+                <div class="form-text text-danger">{{ form.password.errors[0] }}</div>
+              {% endif %}
+            </div>
+
+            <div class="d-grid">
+              {{ form.submit(class='btn btn-primary btn-lg') }}
+            </div>
+          </form>
+
+          <p class="small text-muted mt-3">By creating an account you agree to the eCart Conditions of Use and Privacy Notice.</p>
+          <hr>
+          <p class="text-center mb-0">Already have an account? <a href="{{ url_for('login') }}">Sign in</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% include 'footer.html' %}

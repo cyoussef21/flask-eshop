@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>eCart</title>
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='assets/favicon.png') }}">
+  {{ bootstrap.load_css() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/shop.css') }}">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+<nav class="navbar navbar-expand-lg navbar-dark bg-amazon">
+  <div class="container-fluid align-items-center">
+    <a class="navbar-brand d-flex align-items-center pe-3 navbar-white" href="{{ url_for('home_page') }}">
+      <img src="{{ url_for('static', filename='assets/logo.png') }}" alt="logo" class="me-2">
+      <span class="brand-text">eCart</span>
+    </a>
+
+    {% if current_user.is_authenticated and current_user.permissions == 'admin' %}
+    <div class="d-none d-lg-flex align-items-center text-white pe-3 small">
+      <a href="{{ url_for('admin_panel') }} " class="navbar-white fw-bold">Admin Panel</a>
+    </div>
+    {% else %}
+    <div class="d-none d-lg-flex align-items-center text-white pe-3 small">
+      <a class="navbar-white">Deliver to<strong class="ms-1">Your Address</strong></a>
+    </div>
+    {% endif %}
+    <form class="d-flex flex-grow-1 mx-2" role="search">
+      <input class="form-control" type="search" placeholder="eCart" aria-label="Search">
+      <button class="btn btn-warning" type="submit">Search</button>
+    </form>
+
+    <ul class="navbar-nav ms-2 d-flex flex-row align-items-center">
+      {% if current_user.is_authenticated %}
+      <li class="nav-item me-3 text-white text-end d-none d-md-block">
+        <a class="navbar-white d-flex flex-column">
+          <div class="small text-start">Hello,</div>
+          <div class="fw-bold">{{ current_user.name }}</div>
+        </a>
+      </li>
+      <li class="nav-item me-3 text-white text-end d-none d-md-block">
+        <a href="{{ url_for('logout') }}" class="navbar-white d-flex flex-column">
+          <div class="fw-bold">Sign</div>
+          <div class="fw-bold">Out</div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white d-flex align-items-center navbar-white" href="{{ url_for('cart_page') }}">
+         <img src="{{ url_for('static', filename='assets/cart.png') }}" alt="logo">
+          <span class="ms-1 fw-bold">Cart</span>
+        </a>
+        {% else %}
+      <li class="nav-item me-3 text-white text-end">
+        <a class="navbar-white d-flex flex-column" href="{{ url_for('login') }}">
+          <div class="small text-start">Hello,</div>
+          <div class="fw-bold">Sign in</div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white d-flex align-items-center navbar_white">
+          <img src="{{ url_for('static', filename='assets/cart.png') }}" alt="logo">
+          <span class="ms-1 fw-bold">Cart</span>
+        </a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+
+<!-- Departments bar -->
+<div class="bg-light border-bottom small">
+  <div class="container">
+    <div class="d-flex overflow-auto py-2">
+      <a class="me-3 text-decoration-none text-muted" href="{{ url_for('category_page', category='electronics') }}">Electronics</a>
+      <a class="me-3 text-decoration-none text-muted" href="{{ url_for('category_page', category='fashion') }}">Fashion</a>
+      <a class="me-3 text-decoration-none text-muted" href="{{ url_for('category_page', category='home') }}">Home</a>
+      <a class="me-3 text-decoration-none text-muted" href="{{ url_for('category_page', category='beauty') }}">Beauty</a>
+    </div>
+  </div>
+</div>
+</body>

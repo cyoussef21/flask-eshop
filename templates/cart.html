@@ -1,0 +1,53 @@
+{% include 'header.html' %}
+
+<main class="container my-4">
+  <div class="row">
+    <div class="col-lg-8">
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      {% for message in messages %}
+      <p class="flash alert alert-danger">{{ message }}</p>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+      <h2 class="mb-2">Cart</h2>
+      {% if cart %}
+      {% for item, quantity in cart %}
+      <div class="card mb-3">
+        <div class="row g-0 align-items-center">
+          <div class="col-3 p-2 d-flex align-items-center justify-content-center">
+            <img src="{{ item.image }}" class="img-fluid" alt="{{ item.name }}">
+          </div>
+          <div class="col-6">
+            <div class="card-body py-2">
+              <h2 class="card-title mb-4">{{ item.name }}</h2>
+              <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                <a href="{{ url_for('cart_delete', product_id=item.product_id) }}"  type="button" class="btn btn-outline-danger">
+                  {% if quantity == 1 %}
+                    <img src="{{ url_for('static', filename='assets/trash.png') }}" class="trash-icon" alt="trash">
+                  {% else %}
+                     -
+                  {% endif %}
+                </a>
+                <a class="btn btn-outline-dark disabled"> {{ quantity }} </a>
+                <a href="{{ url_for('cart_add', product_id=item.product_id) }}" type="button" class="btn btn-outline-success">+</a>
+              </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+      {% else %}
+      <div class="card p-4 mb-3">
+        <div class="text-center">
+          <h5 class="mb-2">Your Shopping Cart is empty</h5>
+          <p class="small text-muted">Browse our categories to find something you love.</p>
+          <a href="{{ url_for('home_page') }}" class="btn btn-outline-primary mt-2">Continue shopping</a>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</main>
+
+{% include 'footer.html' %}
